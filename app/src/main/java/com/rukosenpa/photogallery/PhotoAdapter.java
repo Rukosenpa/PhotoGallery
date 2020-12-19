@@ -13,7 +13,7 @@ import com.rukosenpa.photogallery.model.Photo;
 import java.util.List;
 
 
-public class PhotoAdapter extends RecyclerView.Adapter <PhotoAdapter.ViewHolder>{
+public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder>{
     private final List<Photo> values;
     private OnInsertListener onInsertListener;
 
@@ -31,8 +31,7 @@ public class PhotoAdapter extends RecyclerView.Adapter <PhotoAdapter.ViewHolder>
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        String s;
-        s = "https://farm" + values.get(position).getFarm() + ".staticflickr.com/" +
+        String s = "https://farm" + values.get(position).getFarm() + ".staticflickr.com/" +
                 values.get(position).getServer() + "/" + values.get(position).getId() +
                 "_" + values.get(position).getSecret() + "_q.jpg";
         Picasso.get().load(s).into(holder.image);
