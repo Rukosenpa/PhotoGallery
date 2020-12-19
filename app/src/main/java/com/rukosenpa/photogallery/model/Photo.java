@@ -1,26 +1,60 @@
 package com.rukosenpa.photogallery.model;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Photo implements Serializable {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "id",
+        "owner",
+        "secret",
+        "server",
+        "farm",
+        "title",
+        "ispublic",
+        "isfriend",
+        "isfamily",
+        "url_s",
+        "height_s",
+        "width_s"
+})
+public class Photo {
 
+    @JsonProperty("id")
     private String id;
+    @JsonProperty("owner")
     private String owner;
+    @JsonProperty("secret")
     private String secret;
+    @JsonProperty("server")
     private String server;
+    @JsonProperty("farm")
     private int farm;
+    @JsonProperty("title")
     private String title;
+    @JsonProperty("ispublic")
     private int ispublic;
+    @JsonProperty("isfriend")
     private int isfriend;
+    @JsonProperty("isfamily")
     private int isfamily;
-    private String media;
-    private String mediaStatus;
+    @JsonProperty("url_s")
     private String urlS;
-    private String heightS;
-    private String widthS;
-    private final static long serialVersionUID = -4481577031136186301L;
+    @JsonProperty("height_s")
+    private int heightS;
+    @JsonProperty("width_s")
+    private int widthS;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * No args constructor for use in serialization
@@ -31,20 +65,18 @@ public class Photo implements Serializable {
     /**
      * @param owner
      * @param server
-     * @param isfriend
-     * @param mediaStatus
-     * @param widthS
-     * @param secret
-     * @param media
-     * @param title
-     * @param isfamily
      * @param urlS
      * @param heightS
      * @param ispublic
+     * @param isfriend
      * @param farm
+     * @param widthS
      * @param id
+     * @param secret
+     * @param title
+     * @param isfamily
      */
-    public Photo(String id, String owner, String secret, String server, int farm, String title, int ispublic, int isfriend, int isfamily, String media, String mediaStatus, String urlS, String heightS, String widthS) {
+    public Photo(String id, String owner, String secret, String server, int farm, String title, int ispublic, int isfriend, int isfamily, String urlS, int heightS, int widthS) {
         super();
         this.id = id;
         this.owner = owner;
@@ -55,128 +87,144 @@ public class Photo implements Serializable {
         this.ispublic = ispublic;
         this.isfriend = isfriend;
         this.isfamily = isfamily;
-        this.media = media;
-        this.mediaStatus = mediaStatus;
         this.urlS = urlS;
         this.heightS = heightS;
         this.widthS = widthS;
     }
 
+    @JsonProperty("id")
     public String getId() {
         return id;
     }
 
+    @JsonProperty("id")
     public void setId(String id) {
         this.id = id;
     }
 
+    @JsonProperty("owner")
     public String getOwner() {
         return owner;
     }
 
+    @JsonProperty("owner")
     public void setOwner(String owner) {
         this.owner = owner;
     }
 
+    @JsonProperty("secret")
     public String getSecret() {
         return secret;
     }
 
+    @JsonProperty("secret")
     public void setSecret(String secret) {
         this.secret = secret;
     }
 
+    @JsonProperty("server")
     public String getServer() {
         return server;
     }
 
+    @JsonProperty("server")
     public void setServer(String server) {
         this.server = server;
     }
 
+    @JsonProperty("farm")
     public int getFarm() {
         return farm;
     }
 
+    @JsonProperty("farm")
     public void setFarm(int farm) {
         this.farm = farm;
     }
 
+    @JsonProperty("title")
     public String getTitle() {
         return title;
     }
 
+    @JsonProperty("title")
     public void setTitle(String title) {
         this.title = title;
     }
 
+    @JsonProperty("ispublic")
     public int getIspublic() {
         return ispublic;
     }
 
+    @JsonProperty("ispublic")
     public void setIspublic(int ispublic) {
         this.ispublic = ispublic;
     }
 
+    @JsonProperty("isfriend")
     public int getIsfriend() {
         return isfriend;
     }
 
+    @JsonProperty("isfriend")
     public void setIsfriend(int isfriend) {
         this.isfriend = isfriend;
     }
 
+    @JsonProperty("isfamily")
     public int getIsfamily() {
         return isfamily;
     }
 
+    @JsonProperty("isfamily")
     public void setIsfamily(int isfamily) {
         this.isfamily = isfamily;
     }
 
-    public String getMedia() {
-        return media;
-    }
-
-    public void setMedia(String media) {
-        this.media = media;
-    }
-
-    public String getMediaStatus() {
-        return mediaStatus;
-    }
-
-    public void setMediaStatus(String mediaStatus) {
-        this.mediaStatus = mediaStatus;
-    }
-
+    @JsonProperty("url_s")
     public String getUrlS() {
         return urlS;
     }
 
+    @JsonProperty("url_s")
     public void setUrlS(String urlS) {
         this.urlS = urlS;
     }
 
-    public String getHeightS() {
+    @JsonProperty("height_s")
+    public int getHeightS() {
         return heightS;
     }
 
-    public void setHeightS(String heightS) {
+    @JsonProperty("height_s")
+    public void setHeightS(int heightS) {
         this.heightS = heightS;
     }
 
-    public String getWidthS() {
+    @JsonProperty("width_s")
+    public int getWidthS() {
         return widthS;
     }
 
-    public void setWidthS(String widthS) {
+    @JsonProperty("width_s")
+    public void setWidthS(int widthS) {
         this.widthS = widthS;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("id", id).append("title", title).toString();
+        return new ToStringBuilder(this).append("id", id).append("owner", owner).append("secret", secret).append("server", server).append("farm", farm).append("title", title).append("ispublic", ispublic).append("isfriend", isfriend).append("isfamily", isfamily).append("urlS", urlS).append("heightS", heightS).append("widthS", widthS).append("additionalProperties", additionalProperties).toString();
     }
 
 }

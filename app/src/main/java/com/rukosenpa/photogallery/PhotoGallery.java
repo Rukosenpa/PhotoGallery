@@ -33,13 +33,14 @@ public class PhotoGallery extends AppCompatActivity {
         retrofit.create(FlickrAPI.class).getRecent().enqueue(new Callback<PhotosResponse>() {
             @Override
             public void onResponse(Call<PhotosResponse> call, Response<PhotosResponse> response) {
-                response.body();
-                PhotoAdapter adapter = new PhotoAdapter(response.body().getPhotos().getPhotos());
+                assert response.body() != null;
+                PhotoAdapter adapter = new PhotoAdapter(response.body().getPhotos().getPhoto());
                 recycler.setAdapter(adapter);
             }
 
             @Override
             public void onFailure(Call<PhotosResponse> call, Throwable t) {
+                System.out.println("Failure");
             }
         });
 
