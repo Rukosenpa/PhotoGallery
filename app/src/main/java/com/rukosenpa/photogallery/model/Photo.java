@@ -1,5 +1,10 @@
 package com.rukosenpa.photogallery.model;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -27,9 +32,12 @@ import java.util.Map;
         "height_s",
         "width_s"
 })
+@Entity
 public class Photo {
 
     @JsonProperty("id")
+    @PrimaryKey
+    @NonNull
     private String id;
     @JsonProperty("owner")
     private String owner;
@@ -54,29 +62,17 @@ public class Photo {
     @JsonProperty("width_s")
     private int widthS;
     @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    @Ignore
+    private final Map<String, Object> additionalProperties = new HashMap<>();
 
     /**
      * No args constructor for use in serialization
      */
     public Photo() {
+        id = "1";
     }
 
-    /**
-     * @param owner
-     * @param server
-     * @param urlS
-     * @param heightS
-     * @param ispublic
-     * @param isfriend
-     * @param farm
-     * @param widthS
-     * @param id
-     * @param secret
-     * @param title
-     * @param isfamily
-     */
-    public Photo(String id, String owner, String secret, String server, int farm, String title, int ispublic, int isfriend, int isfamily, String urlS, int heightS, int widthS) {
+    public Photo(@NonNull String id, String owner, String secret, String server, int farm, String title, int ispublic, int isfriend, int isfamily, String urlS, int heightS, int widthS) {
         super();
         this.id = id;
         this.owner = owner;
@@ -92,6 +88,7 @@ public class Photo {
         this.widthS = widthS;
     }
 
+    @NonNull
     @JsonProperty("id")
     public String getId() {
         return id;
@@ -210,16 +207,6 @@ public class Photo {
     @JsonProperty("width_s")
     public void setWidthS(int widthS) {
         this.widthS = widthS;
-    }
-
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
     }
 
     @Override
